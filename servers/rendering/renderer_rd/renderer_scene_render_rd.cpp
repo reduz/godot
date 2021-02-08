@@ -6502,7 +6502,7 @@ void RendererSceneRenderRD::_setup_lights(const PagedArray<RID> &p_lights, const
 		light_data.atlas_rect[2] = 0;
 		light_data.atlas_rect[3] = 0;
 
-		light_data.max_energy = storage->light_get_param(base, RS::LIGHT_PARAM_MAX_ENERGY);
+		light_data.min_size = Math::pow(storage->light_get_param(base, RS::LIGHT_PARAM_MAX_ENERGY), -light_data.attenuation);
 
 		RID projector = storage->light_get_projector(base);
 
