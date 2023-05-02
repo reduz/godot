@@ -114,7 +114,7 @@ Error RemoteFilesystemClient::_store_cache_file(const Vector<FileCache> &p_cache
 	String full_path = cache_path.path_join(FILES_CACHE_FILE);
 	String base_file_dir = full_path.get_base_dir();
 	Error err = DirAccess::make_dir_recursive_absolute(base_file_dir);
-	ERR_FAIL_COND_V_MSG(err != OK, err, "Unable to create base directory to store cache file: " + base_file_dir);
+	ERR_FAIL_COND_V_MSG(err != OK && err != ERR_ALREADY_EXISTS, err, "Unable to create base directory to store cache file: " + base_file_dir);
 
 	Ref<FileAccess> f = FileAccess::open(full_path, FileAccess::WRITE);
 	ERR_FAIL_COND_V_MSG(f.is_null(), ERR_FILE_CANT_OPEN, "Unable to open the remote cache file for writing: " + full_path);
